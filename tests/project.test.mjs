@@ -47,3 +47,15 @@ test('private environment file is ignored by Git', async () => {
   assert.match(ignore, /^\.netlify\/$/m);
   assert.match(ignore, /^node_modules\/$/m);
 });
+
+test('homepage includes the Google Tag Manager container in head and body', async () => {
+  const homepage = await readFile(new URL('index.html', root), 'utf8');
+  const head = homepage.slice(homepage.indexOf('<head>'), homepage.indexOf('</head>'));
+  const bodyStart = homepage.slice(homepage.indexOf('<body>'), homepage.indexOf('<main>'));
+  assert.match(head, /GTM-JPS6SQ78/);
+  assert.match(bodyStart, /GTM-JPS6SQ78/);
+
+  const netlify = await readFile(new URL('netlify.toml', root), 'utf8');
+  assert.match(netlify, /https:\/\/www\.googletagmanager\.com/);
+  assert.match(netlify, /https:\/\/connect\.facebook\.net/);
+});
