@@ -1,0 +1,22 @@
+[
+  {"id":"maruti-suzuki","name":"Maruti Suzuki","logo":"/assets/brands/maruti-suzuki.svg","models":["Swift","Baleno","Brezza","Ertiga","WagonR","Dzire","Fronx","Grand Vitara","Jimny","Celerio"]},
+  {"id":"hyundai","name":"Hyundai","logo":"/assets/brands/hyundai.svg","models":["Creta","Venue","Verna","i20","Grand i10 Nios","Alcazar","Tucson","Exter","Aura"]},
+  {"id":"tata","name":"Tata","logo":"/assets/brands/tata.svg","models":["Nexon","Punch","Harrier","Safari","Altroz","Tiago","Tigor","Curvv"]},
+  {"id":"mahindra","name":"Mahindra","logo":"/assets/brands/mahindra.svg","models":["Scorpio-N","Scorpio Classic","Thar","XUV 3XO","XUV700","Bolero","BE 6","XEV 9e"]},
+  {"id":"kia","name":"Kia","logo":"/assets/brands/kia.svg","models":["Seltos","Sonet","Carens","Carnival","EV6","Syros"]},
+  {"id":"honda","name":"Honda","logo":"/assets/brands/honda.svg","models":["City","Amaze","Elevate","Jazz","WR-V"]},
+  {"id":"toyota","name":"Toyota","logo":"/assets/brands/toyota.svg","models":["Innova Crysta","Innova Hycross","Fortuner","Glanza","Urban Cruiser Hyryder","Camry","Hilux"]},
+  {"id":"mg","name":"MG","logo":"/assets/brands/mg.svg","models":["Hector","Astor","ZS EV","Comet EV","Gloster","Windsor EV"]},
+  {"id":"skoda","name":"Skoda","logo":"/assets/brands/skoda.svg","models":["Kushaq","Slavia","Kodiaq","Superb","Kylaq"]},
+  {"id":"volkswagen","name":"Volkswagen","logo":"/assets/brands/volkswagen.svg","models":["Virtus","Taigun","Tiguan","Polo","Vento"]},
+  {"id":"renault","name":"Renault","logo":"/assets/brands/renault.svg","models":["Kwid","Kiger","Triber","Duster"]},
+  {"id":"nissan","name":"Nissan","logo":"/assets/brands/nissan.svg","models":["Magnite","Kicks","X-Trail","Terrano"]},
+  {"id":"ford","name":"Ford","logo":"/assets/brands/ford.svg","models":["EcoSport","Endeavour","Figo","Aspire","Mustang"]},
+  {"id":"jeep","name":"Jeep","logo":"/assets/brands/jeep.svg","models":["Compass","Meridian","Wrangler","Grand Cherokee"]},
+  {"id":"bmw","name":"BMW","logo":"/assets/brands/bmw.svg","models":["3 Series","5 Series","7 Series","X1","X3","X5","X7"]},
+  {"id":"mercedes-benz","name":"Mercedes-Benz","logo":"","models":["A-Class","C-Class","E-Class","S-Class","GLA","GLC","GLE","GLS"]},
+  {"id":"audi","name":"Audi","logo":"/assets/brands/audi.svg","models":["A4","A6","A8","Q3","Q5","Q7","Q8"]},
+  {"id":"volvo","name":"Volvo","logo":"/assets/brands/volvo.svg","models":["XC40","XC60","XC90","S60","S90","C40 Recharge"]},
+  {"id":"land-rover","name":"Land Rover","logo":"","models":["Range Rover Evoque","Range Rover Velar","Range Rover Sport","Defender","Discovery Sport"]},
+  {"id":"porsche","name":"Porsche","logo":"/assets/brands/porsche.svg","models":["Macan","Cayenne","Panamera","911","Taycan"]}
+]

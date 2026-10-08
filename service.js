@@ -1,0 +1,29 @@
+const pathParts = location.pathname.split('/').filter(Boolean);
+const pathId = pathParts[0] === 'services' ? pathParts.at(-1) : '';
+const id = decodeURIComponent(pathId || new URLSearchParams(location.search).get('id') || '');
+const esc = (value = '') => String(value).replace(/[&<>\"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
+let catalogue = [];
+const productLabel = (service) => service.bookingMode === 'home' || service.category === 'Home & Upholstery'
+  ? 'Diversey professional cleaning liquids'
+  : /Interior|Detailing Packages/i.test(`${service.category} ${service.name}`)
+    ? '3M car-care products and Diversey professional cleaning liquids'
+    : '3M professional car-care products';
+async function data() { try { const response = await fetch('/.netlify/functions/services', { cache: 'no-store' }); if (!response.ok) throw Error(); return response.json(); } catch { return (await fetch('/data/services.json')).json(); } }
+function card(service) { return `<article class="product-card"><a class="product-image" href="/services/${service.id}"><img src="${esc(service.image)}" alt="${esc(service.name)}" loading="lazy"></a><div class="product-body"><p class="product-category">${esc(service.category)}</p><h3><a href="/services/${service.id}">${esc(service.name)}</a></h3><p class="product-description">${esc(service.shortDescription)}</p><div class="product-price"><div><small>Starting at</small><strong>${esc(service.priceDisplay)}</strong></div><div class="product-actions"><a class="card-book" href="/book?service=${service.id}">Book now</a></div></div></div></article>`; }
+async function render() {
+  catalogue = await data(); const service = catalogue.find((item) => item.id === id && item.active !== false);
+  if (!service) { document.querySelector('#service-detail').innerHTML = '<div class="detail-loading"><h1>Service not found</h1><a href="/#services">Return to services</a></div>'; return; }
+  document.title = `${service.name} in Delhi NCR | GTS Car Detailing`; document.querySelector('#canonical').href = `https://gtscardetailing.shop/services/${service.id}`;
+  document.querySelector('meta[name="description"]').content = `${service.shortDescription} Book professional doorstep ${service.name.toLowerCase()} with GTS Car Detailing in Delhi NCR.`;
+  const schema = document.createElement('script');
+  schema.type = 'application/ld+json';
+  schema.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: service.name, description: service.fullDescription || service.shortDescription, provider: { '@type': 'AutoWash', name: 'GTS Car Detailing', url: 'https://gtscardetailing.shop/' }, areaServed: ['Delhi', 'Delhi NCR'], serviceType: service.category, url: `https://gtscardetailing.shop/services/${service.id}`, image: `https://gtscardetailing.shop${service.image}`, offers: service.price ? { '@type': 'Offer', priceCurrency: 'INR', price: service.price, availability: 'https://schema.org/InStock' } : undefined });
+  document.head.append(schema);
+  document.querySelector('#header-book').href = `/book?service=${service.id}`; document.querySelector('#mobile-book').href = `/book?service=${service.id}`;
+  const old = Number(service.oldPrice) > Number(service.price) ? `<del>₹${Number(service.oldPrice).toLocaleString('en-IN')}</del>` : '';
+  const priceList = service.vehiclePricing ? `<div class="detail-block"><h2>Vehicle-wise pricing</h2><div class="vehicle-price-list">${Object.entries(service.vehiclePricing).filter(([vehicle]) => vehicle !== 'MUV').map(([vehicle, price]) => `<div><span>${esc(vehicle)}</span><strong>₹${Number(price).toLocaleString('en-IN')}</strong></div>`).join('')}</div></div>` : '';
+  document.querySelector('#service-detail').innerHTML = `<nav class="detail-breadcrumb"><a href="/">Home</a><span>/</span><a href="/#services">Services</a><span>/</span><b>${esc(service.name)}</b></nav><div class="detail-layout"><div class="detail-gallery"><img src="${esc(service.image)}" alt="${esc(service.name)} by GTS Car Detailing"><div class="detail-stamp"><span>Professional equipment</span><span>Doorstep service</span></div></div><div class="detail-copy"><p class="kicker dark">${esc(service.label || service.category)}</p><h1>${esc(service.name)}</h1><p class="detail-lead">${esc(service.fullDescription || service.shortDescription)}</p><span class="product-material-chip">Uses ${esc(productLabel(service))}</span><div class="detail-price"><div><small>${service.vehiclePricing ? 'Starting at' : 'Price'}</small><strong>${esc(service.priceDisplay)}</strong></div>${old}${service.discount ? `<mark>Save ${Number(service.discount)}%</mark>` : ''}</div>${priceList}<div class="detail-block"><h2>What’s included</h2><ul class="detail-features">${(service.features || []).map((feature) => `<li>${esc(feature)}</li>`).join('')}</ul></div><div class="detail-block"><h2>Professional products used</h2><p>We select ${esc(productLabel(service))} according to the surface, material and condition being treated.</p></div><div class="detail-block"><h2>Suitable for</h2><div class="vehicle-tags">${(service.vehicles || []).map((vehicle) => `<span>${esc(vehicle)}</span>`).join('')}</div></div><p class="detail-note"><b>Important:</b> Listed prices are starting prices. Final pricing can vary by vehicle size, condition and agreed scope.</p><div class="detail-actions"><a class="btn btn-primary" href="/book?service=${service.id}">Book this service <span>→</span></a><a class="btn btn-whatsapp" data-whatsapp data-whatsapp-message="Hello GTS Car Detailing, I would like to enquire about ${esc(service.name)}.">WhatsApp</a></div></div></div>`;
+  window.applyGTSSettings?.(window.GTSSettings);
+  document.querySelector('#recommended').innerHTML = catalogue.filter((item) => item.id !== service.id && item.active !== false).slice(0, 3).map(card).join('');
+}
+render();

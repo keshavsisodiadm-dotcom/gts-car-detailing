@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#0a0d12" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/admin.css" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <title>GTS Service Manager</title>
+  </head>
+  <body class="admin-body">
+    <section id="login-view" class="login-view">
+      <div class="login-panel">
+        <a href="/" class="brand-logo-image login-logo" aria-label="GTS Car Detailing home"><img src="/assets/gts-header-logo.png" alt="GTS Car Detailing" /></a>
+        <p class="kicker">SECURE ADMIN</p>
+        <h1>Service manager</h1>
+        <p>Manage your live catalogue, pricing and incoming bookings.</p>
+        <form id="login-form">
+          <label
+            >Username<input
+              name="username"
+              autocomplete="username"
+              required /></label
+          ><label
+            >Password<input
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+          /></label>
+          <p class="admin-message" role="alert"></p>
+          <button class="admin-button primary" type="submit">
+            Sign in <span>→</span>
+          </button>
+        </form>
+        <a href="/">← Return to website</a>
+      </div>
+      <div class="login-visual">
+        <img
+          src="/assets/services/ceramic.webp"
+          alt="Premium ceramic detailing"
+        />
+      </div>
+    </section>
+    <section id="admin-view" hidden>
+      <aside class="admin-nav">
+        <a href="/" class="admin-logo brand-logo-image" aria-label="GTS Car Detailing home"><img src="/assets/gts-header-logo.png" alt="GTS Car Detailing" /></a>
+        <nav>
+          <button class="active" data-panel="services">
+            <span>▦</span> Services</button
+          ><button data-panel="bookings"><span>▤</span> Bookings</button
+          ><button data-panel="settings"><span>⚙</span> Settings</button
+          ><a href="/" target="_blank"><span>↗</span> View website</a>
+        </nav>
+        <button id="logout"><span>⇥</span> Log out</button>
+      </aside>
+      <main class="admin-main">
+        <header>
+          <div>
+            <small>GTS CAR DETAILING</small>
+            <h1 id="panel-title">Services</h1>
+          </div>
+          <button id="add-service" class="admin-button primary">
+            ＋ Add service
+          </button>
+        </header>
+        <section id="services-panel">
+          <div class="admin-toolbar">
+            <label
+              ><span>⌕</span
+              ><input
+                id="admin-search"
+                type="search"
+                placeholder="Search services" /></label
+            ><select id="status-filter" aria-label="Filter by status">
+              <option value="all">All statuses</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+              <option value="featured">Featured</option></select
+            ><span id="service-count"></span>
+          </div>
+          <div class="service-table-head">
+            <span>Photo & service</span><span>Category</span><span>Price</span
+            ><span>Status</span><span>Order & actions</span>
+          </div>
+          <div id="admin-services" class="admin-service-list"></div>
+        </section>
+        <section id="bookings-panel" hidden>
+          <div class="admin-toolbar">
+            <label
+              ><span>⌕</span
+              ><input
+                id="booking-search"
+                type="search"
+                placeholder="Search customer or booking" /></label
+            ><span id="booking-count"></span>
+          </div>
+          <div id="admin-bookings" class="booking-list"></div>
+        </section>
+        <section id="settings-panel" hidden>
+          <div class="settings-card">
+            <p class="kicker dark">PUBLIC CONTACT</p>
+            <h2>Business contact details</h2>
+            <p>Updates the phone, WhatsApp number and email across the public website and booking flow.</p>
+            <form id="settings-form">
+              <label>10-digit phone number<input name="phone" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required /></label>
+              <label>Public email address<input name="email" type="text" inputmode="email" maxlength="160" required /></label>
+              <button class="admin-button primary" type="submit">Save contact details</button>
+              <p id="settings-message" class="admin-message" role="status"></p>
+            </form>
+          </div>
+        </section>
+      </main>
+    </section>
+    <dialog id="service-editor">
+      <form id="service-form">
+        <header>
+          <div>
+            <small>SERVICE CATALOGUE</small>
+            <h2 id="editor-title">Add service</h2>
+          </div>
+          <button type="button" id="close-editor" aria-label="Close">×</button>
+        </header>
+        <div class="editor-body">
+          <div class="photo-editor">
+            <img
+              id="photo-preview"
+              src="/assets/services/exterior.webp"
+              alt="Service preview"
+            /><label class="upload-button"
+              >Upload / replace image<input
+                id="service-photo"
+                type="file"
+                accept="image/png,image/jpeg,image/webp" /></label
+            ><button id="remove-photo" type="button">Remove image</button
+            ><small>Images are resized before saving.</small>
+          </div>
+          <div class="editor-fields">
+            <input type="hidden" name="id" /><label
+              >Service name<input name="name" required
+            /></label>
+            <label>Category<input name="category" required /></label>
+            <div class="editor-row three">
+              <label
+                >Price<input
+                  name="price"
+                  type="number"
+                  min="0"
+                  required /></label
+              ><label
+                >Original price<input
+                  name="oldPrice"
+                  type="number"
+                  min="0" /></label
+              ><label
+                >Discount %<input
+                  name="discount"
+                  type="number"
+                  min="0"
+                  max="99"
+              /></label>
+            </div>
+            <label
+              >Short description<input
+                name="shortDescription"
+                maxlength="130"
+                required /></label
+            ><label
+              >Full description<textarea
+                name="fullDescription"
+                required
+              ></textarea></label
+            ><label
+              >Features / what’s included <small>One per line</small
+              ><textarea name="features" required></textarea></label
+            ><label
+              >Suitable vehicle types <small>Comma separated</small
+              ><input
+                name="vehicles"
+                value="Hatchback, Sedan, SUV, MUV, Luxury"
+            /></label>
+            <div class="check-row">
+              <label
+                ><input name="active" type="checkbox" checked /> Active</label
+              ><label><input name="featured" type="checkbox" /> Featured</label
+              ><label><input name="popular" type="checkbox" /> Popular</label>
+            </div>
+          </div>
+        </div>
+        <p id="editor-message" class="admin-message"></p>
+        <footer>
+          <button
+            type="button"
+            class="admin-button secondary"
+            id="cancel-editor"
+          >
+            Cancel</button
+          ><button type="submit" class="admin-button primary">
+            Save service
+          </button>
+        </footer>
+      </form>
+    </dialog>
+    <script type="module" src="/admin.js"></script>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0a0d12" />
+    <meta name="robots" content="index,follow" />
+    <meta
+      name="description"
+      content="Book a GTS Car Detailing doorstep service in a few simple steps."
+    />
+    <link rel="canonical" href="https://gtscardetailing.shop/book" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/flow.css" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon.png" />
+    <title>Book Doorstep Service | GTS Car Detailing</title>
+  </head>
+  <body class="booking-body">
+    <header class="booking-header">
+      <a href="/" class="booking-logo brand-logo-image" aria-label="GTS Car Detailing home"><img src="/assets/gts-header-logo.png" alt="GTS Car Detailing" /></a><a href="/" class="booking-close" aria-label="Close booking">×</a>
+    </header>
+    <main class="booking-shell">
+      <aside class="booking-sidebar">
+        <p class="kicker">DOORSTEP BOOKING</p>
+        <h1>Book premium car care in a few taps.</h1>
+        <p>Your selections stay saved as you move between steps.</p>
+        <div class="booking-assurance">
+          <span>✓ Live service pricing</span
+          ><span>✓ Booking saved before WhatsApp</span
+          ><span>✓ We come to your address</span>
+        </div>
+        <a data-phone data-phone-prefix="Need help? " href="tel:+918595836996">Need help? +91 85958 36996</a>
+        <a data-email href="mailto:gtscardetailing24×7@gmail.com">gtscardetailing24×7@gmail.com</a>
+      </aside>
+      <section class="booking-workspace">
+        <div class="stepper" aria-label="Booking progress">
+          <button data-jump="1"><b>1</b><span>Service</span></button><i></i
+          ><button data-jump="2"><b>2</b><span>Car</span></button><i></i
+          ><button data-jump="3"><b>3</b><span>Brand</span></button><i></i
+          ><button data-jump="4"><b>4</b><span>Model</span></button><i></i
+          ><button data-jump="6"><b>5</b><span>Details</span></button>
+        </div>
+        <form id="booking-form" novalidate>
+          <section class="booking-step active" data-step="1">
+            <div class="step-heading">
+              <small>STEP 1 OF 6</small>
+              <h2>Select a service</h2>
+              <p>Choose one package to continue.</p>
+            </div>
+            <div id="booking-services" class="booking-products"></div>
+          </section>
+          <section class="booking-step" data-step="2">
+            <div class="step-heading">
+              <small>STEP 2 OF 6</small>
+              <h2>Choose vehicle type</h2>
+              <p>Pricing may vary with vehicle size.</p>
+            </div>
+            <div id="vehicle-types" class="vehicle-grid"></div>
+          </section>
+          <section class="booking-step" data-step="3">
+            <div class="step-heading">
+              <small>STEP 3 OF 6</small>
+              <h2>Select car brand</h2>
+              <p>Search or tap the manufacturer logo.</p>
+            </div>
+            <label class="booking-search"
+              ><span>⌕</span
+              ><input
+                id="brand-search"
+                type="search"
+                placeholder="Search car brand"
+                aria-label="Search car brand"
+            /></label>
+            <div id="brands" class="brand-grid"></div>
+          </section>
+          <section class="booking-step" data-step="4">
+            <div class="step-heading">
+              <small>STEP 4 OF 6</small>
+              <h2>Select model</h2>
+              <p id="model-copy">
+                Only models for your selected brand are shown.
+              </p>
+            </div>
+            <label class="booking-search"
+              ><span>⌕</span
+              ><input
+                id="model-search"
+                type="search"
+                placeholder="Search model"
+                aria-label="Search car model"
+            /></label>
+            <div id="models" class="model-grid"></div>
+            <label id="other-model-field" class="input-field" hidden
+              >Other model<input
+                id="other-model"
+                placeholder="Enter model name"
+            /></label>
+          </section>
+          <section class="booking-step" data-step="5">
+            <div class="step-heading">
+              <small>STEP 5 OF 6</small>
+              <h2>Confirm service & vehicle</h2>
+              <p>Review your selections before adding your address.</p>
+            </div>
+            <div id="selection-summary" class="selection-summary"></div>
+          </section>
+          <section class="booking-step" data-step="6">
+            <div class="step-heading">
+              <small>FINAL STEP</small>
+              <h2>Address & contact details</h2>
+              <p>Only the information needed to arrange your doorstep visit.</p>
+            </div>
+            <div class="form-grid">
+              <label class="input-field full"
+                >Full name<input
+                  name="name"
+                  autocomplete="name"
+                  required /></label
+              ><label class="input-field full"
+                >Mobile number<input
+                  name="phone"
+                  type="tel"
+                  inputmode="numeric"
+                  autocomplete="tel"
+                  pattern="[0-9+ -]{10,15}"
+                  required /></label
+              ><label class="input-field"
+                >House / Flat / Building<input
+                  name="house"
+                  autocomplete="address-line1"
+                  required /></label
+              ><label class="input-field"
+                >Street / Locality<input
+                  name="locality"
+                  autocomplete="address-line2"
+                  required /></label
+              ><label class="input-field"
+                >Landmark <small>Optional</small
+                ><input name="landmark" /></label
+              ><label class="input-field"
+                >City<input
+                  name="city"
+                  value="Delhi"
+                  autocomplete="address-level2"
+                  required /></label
+              ><label class="input-field"
+                >Pincode<input
+                  name="pin"
+                  inputmode="numeric"
+                  pattern="[0-9]{6}"
+                  autocomplete="postal-code"
+                  required /></label
+              ><label class="input-field"
+                >Preferred date <small>Optional</small
+                ><input id="date" name="date" type="date"
+              /></label>
+              <div class="input-field full">
+                <span>Preferred time <small>Optional</small></span>
+                <div id="slots" class="slot-row">
+                  <button type="button" data-slot="Morning (9 AM – 12 PM)">
+                    Morning</button
+                  ><button type="button" data-slot="Afternoon (12 PM – 4 PM)">
+                    Afternoon</button
+                  ><button type="button" data-slot="Evening (4 PM – 7 PM)">
+                    Evening
+                  </button>
+                </div>
+              </div>
+              <label class="input-field full"
+                >Additional note <small>Optional</small
+                ><textarea
+                  name="notes"
+                  placeholder="Parking instructions or anything we should know"
+                ></textarea>
+              </label>
+            </div>
+            <div id="final-summary" class="final-summary"></div>
+          </section>
+          <p class="form-message" role="alert"></p>
+          <div class="booking-footer">
+            <button id="back" type="button" class="btn btn-back">Back</button>
+            <div id="running-total">
+              <small>Selected service</small><strong>Choose a service</strong>
+            </div>
+            <button id="continue" type="button" class="btn btn-primary">
+              Continue <span>→</span>
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="/site.js"></script>
+    <script type="module" src="/booking.js"></script>
+  </body>
+</html>

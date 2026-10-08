@@ -1,0 +1,17 @@
+{
+  "name": "gts-car-detailing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "node scripts/generate-seo.mjs && node --check app.js && node --check site.js && node --check service.js && node --check booking.js && node --check admin.js && node --check netlify/functions/lib/store.mjs && node --check netlify/functions/services.mjs && node --check netlify/functions/settings.mjs && node --check netlify/functions/admin-settings.mjs && node --check netlify/functions/booking.mjs && node --check netlify/functions/bookings.mjs && node --check netlify/functions/admin-login.mjs && node --check netlify/functions/admin-services.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^9.1.2"
+  },
+  "devDependencies": {
+    "netlify-cli": "^23.10.2"
+  }
+}
