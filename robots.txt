@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /admin.html
-Sitemap: https://gtscardetailing.shop/sitemap.xml
+Sitemap: https://www.gtscardetailing.shop/sitemap.xml

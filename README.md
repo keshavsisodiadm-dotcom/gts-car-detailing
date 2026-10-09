@@ -1,6 +1,6 @@
 # GTS Car Detailing
 
-Production source for the GTS Car Detailing website at [gtscardetailing.shop](https://gtscardetailing.shop). The project is a mobile-first static website backed by Netlify Functions and Netlify Blobs. It provides a public service catalogue, generated SEO service pages, a guided booking flow, WhatsApp hand-off, and an authenticated administration panel.
+Production source for the GTS Car Detailing website at [gtscardetailing.shop](https://www.gtscardetailing.shop). The project is a mobile-first static website backed by Netlify Functions and Netlify Blobs. It provides a public service catalogue, generated SEO service pages, a guided booking flow, WhatsApp hand-off, and an authenticated administration panel.
 
 ## Technology
 

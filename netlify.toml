@@ -7,6 +7,12 @@
   SECRETS_SCAN_OMIT_KEYS = "CONTACT_PHONE"
 
 [[redirects]]
+  from = "https://gtscardetailing.shop/*"
+  to = "https://www.gtscardetailing.shop/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/admin"
   to = "/admin.html"
   status = 200

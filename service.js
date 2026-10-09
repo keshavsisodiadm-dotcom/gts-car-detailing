@@ -13,11 +13,11 @@ function card(service) { return `<article class="product-card"><a class="product
 async function render() {
   catalogue = await data(); const service = catalogue.find((item) => item.id === id && item.active !== false);
   if (!service) { document.querySelector('#service-detail').innerHTML = '<div class="detail-loading"><h1>Service not found</h1><a href="/#services">Return to services</a></div>'; return; }
-  document.title = `${service.name} in Delhi NCR | GTS Car Detailing`; document.querySelector('#canonical').href = `https://gtscardetailing.shop/services/${service.id}`;
+  document.title = `${service.name} in Delhi NCR | GTS Car Detailing`; document.querySelector('#canonical').href = `https://www.gtscardetailing.shop/services/${service.id}`;
   document.querySelector('meta[name="description"]').content = `${service.shortDescription} Book professional doorstep ${service.name.toLowerCase()} with GTS Car Detailing in Delhi NCR.`;
   const schema = document.createElement('script');
   schema.type = 'application/ld+json';
-  schema.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: service.name, description: service.fullDescription || service.shortDescription, provider: { '@type': 'AutoWash', name: 'GTS Car Detailing', url: 'https://gtscardetailing.shop/' }, areaServed: ['Delhi', 'Delhi NCR'], serviceType: service.category, url: `https://gtscardetailing.shop/services/${service.id}`, image: `https://gtscardetailing.shop${service.image}`, offers: service.price ? { '@type': 'Offer', priceCurrency: 'INR', price: service.price, availability: 'https://schema.org/InStock' } : undefined });
+  schema.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: service.name, description: service.fullDescription || service.shortDescription, provider: { '@type': 'AutoWash', name: 'GTS Car Detailing', url: 'https://www.gtscardetailing.shop/' }, areaServed: ['Delhi', 'Delhi NCR'], serviceType: service.category, url: `https://www.gtscardetailing.shop/services/${service.id}`, image: `https://www.gtscardetailing.shop${service.image}`, offers: service.price ? { '@type': 'Offer', priceCurrency: 'INR', price: service.price, availability: 'https://schema.org/InStock' } : undefined });
   document.head.append(schema);
   document.querySelector('#header-book').href = `/book?service=${service.id}`; document.querySelector('#mobile-book').href = `/book?service=${service.id}`;
   const old = Number(service.oldPrice) > Number(service.price) ? `<del>₹${Number(service.oldPrice).toLocaleString('en-IN')}</del>` : '';

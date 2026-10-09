@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 import { test } from 'node:test';
 
 const root = new URL('../', import.meta.url);
@@ -58,4 +58,26 @@ test('homepage includes the Google Tag Manager container in head and body', asyn
   const netlify = await readFile(new URL('netlify.toml', root), 'utf8');
   assert.match(netlify, /https:\/\/www\.googletagmanager\.com/);
   assert.match(netlify, /https:\/\/connect\.facebook\.net/);
+});
+
+test('every canonical URL uses the www production domain', async () => {
+  const serviceDirectories = await readdir(new URL('services/', root), { withFileTypes: true });
+  const htmlFiles = [
+    'index.html',
+    'book.html',
+    'service.html',
+    ...serviceDirectories.filter((entry) => entry.isDirectory()).map((entry) => `services/${entry.name}/index.html`)
+  ];
+
+  for (const file of htmlFiles) {
+    const html = await readFile(new URL(file, root), 'utf8');
+    const canonical = html.match(/<link\s+rel="canonical"[\s\S]*?href="([^"]+)"/i)?.[1];
+    assert.ok(canonical, `${file} must include a canonical URL`);
+    assert.ok(canonical.startsWith('https://www.gtscardetailing.shop/'), `${file} must use the www canonical domain`);
+  }
+
+  const netlify = await readFile(new URL('netlify.toml', root), 'utf8');
+  assert.match(netlify, /from = "https:\/\/gtscardetailing\.shop\/\*"/);
+  assert.match(netlify, /to = "https:\/\/www\.gtscardetailing\.shop\/:splat"/);
+  assert.match(netlify, /status = 301/);
 });

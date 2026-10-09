@@ -35,7 +35,7 @@ function applySettings(settings) {
     if (node === schema) return;
     try {
       const data = JSON.parse(node.textContent);
-      if (data['@id'] === 'https://gtscardetailing.shop/#business') {
+      if (data['@id'] === 'https://www.gtscardetailing.shop/#business') {
         data.email = email;
         node.textContent = JSON.stringify(data);
       }
